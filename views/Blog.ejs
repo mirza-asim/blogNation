@@ -1,0 +1,14 @@
+<%- include("partials/header.ejs") %>
+  <link rel="stylesheet" href="../public/styles/content.css">
+  <link rel="stylesheet" href="../public/styles/layout.css">
+
+  <h1>Posting Time!</h1>
+  <form action="/submit" method="POST">
+    <input name="name" type="text" class="feedback-input" placeholder="Name" />
+    <input name="email" type="text" class="feedback-input" placeholder="Email" />
+    <textarea name="text" class="feedback-input" placeholder="Blog away compadre!"></textarea>
+    <input type="submit" value="SUBMIT" />
+  </form>
+
+
+  <%- include("partials/footer.ejs") %>

@@ -1,0 +1,98 @@
+<%- include("partials/header.ejs") %>
+  <link rel="stylesheet" href="../public/styles/content.css">
+  <link rel="stylesheet" href="../public/styles/layout.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+  <script src="index.js"></script>
+
+  <h1>Home Page</h1>
+
+  <p>Lorem ipsum dolor sit amet, et proin, justo mus. Porta suspendisse turpis netus sagittis tortor at, vitae aliquet
+    pharetra cras velit, id gravida, neque nulla lorem, posuere hac. Ultricies eget lacus vehicula, in ante aliquam
+    et,facilisis tempor duis orci. Sed molestie sem in duis eu id, nisl id ultricies metus blandit eget praesent, pede
+    tempornullam, vitae arcu tortor suspendisse nibh risus. Nulla id suscipit reiciendis nulla erat. Porta enim aute
+    luctus,ducimus sodales dolor.
+  </p>
+  <p>
+    Quam purus justo enim purus, dolor enim, ut eu lectus nam eget nibh. Ante illum nullam leo, vivamus aliquam massa
+    massainceptos fermentum porttitor, blandit vehicula, lorem in placerat ut aliquam at sociosqu. Vivamus duis
+    ultricies
+    aliquam placerat, tincidunt scelerisque imperdiet, egestas erat vel. Libero rerum. Donec ligula tristique, purus
+    montes,
+    feugiatid nunc in a nec. Duis odio, vitae sed etiam mi massa, laoreet amet purus amet rhoncus, eget sed, arcu
+    urna.
+    Maecenaswisi id, at donec enim. Proin nisl, pulvinar leo suspendisse, cum parturient non, congue leo et ut in,
+    neque ut
+    lacusauctor quam fermentum urna. Metus quis, mauris dictum aptent ultrices nulla viverra ornare, tempor elit enim
+    leo
+    donec,sed sed. Vivamus sapien facilisi, tempor arcu nulla justo sed et, eget suspendisse lacus sed nunc mattis
+    lectus.
+    Metusgravida.</p>
+    <% if (locals.total) { %>
+      <ol>
+          <% locals.total.forEach((element, index, array) => { %>
+            <li>
+              <div class="l-section">
+                <h5 class="c-section__heading">Some important info</h5>
+                <span class="c-link js-toggleForm">click to edit</span>
+                <form class="form" action="/update" method="POST">
+                  <label>name</label>
+                  <input type="text" name="name" value=<%= element.a; %> >
+                  <label>email</label>
+                  <input type="email" name="email" value=<%= element.b; %> >
+                  <label>blog</label>
+                  <textarea name="blog" value=<%= element.c; %> ><%= element.c; %></textarea>
+                  <input type="hidden" name="count" value=<%= element.d; %>>
+                  </select>
+                  <button type="submit" class="done-button" value="SUBMIT" disabled>Update</button>
+                </form>
+              </div>
+    
+              <script>
+                var form_ele = '.form';
+    
+                // make eveything disabled
+                var disableFormEdit = function(selector){	
+                  $(selector).removeClass('form--enabled').addClass('form--disabled');
+                  $(selector + ' input, ' + selector + ' select, ' + selector + ' button').prop('disabled', true);
+                }
+    
+    
+                // make eveything enabled
+                var enableFormEdit = function(selector){	
+                  $(selector + ' input, ' + selector + ' select, ' + selector + ' button ').prop('disabled', false);
+                  $(selector).removeClass('form--disabled').addClass('form--enabled');
+                }
+    
+    
+                disableFormEdit(form_ele);
+    
+    
+                $('.js-toggleForm').click(function(){
+                  // get the status of form
+                  var form_status = $(form_ele).hasClass('form--disabled') ? 'disabled' : 'enabled';
+                  
+                  // check if disabled or enabled
+                  switch (form_status){
+                    case 'disabled':
+                      enableFormEdit(form_ele);
+                      $(this).text('save')
+                      break;
+                    case 'enabled':
+                      disableFormEdit(form_ele);
+                      $(this).text('click to edit')
+                      break;
+                  }
+                });
+                /* ################################################# */
+    
+                /* ################################################# */
+              </script>
+            </li>
+          <% }); %>
+      </ol>
+        <% locals.total.forEach((element, index, array) => { %>
+        <h3> <%= element.a; %> <br></h3> <h4> <%= element.b; %> <br></h4> <p>  <%= element.c; %> <br> </p>
+      <% }); %>
+    <% } %>
+
+  <%- include("partials/footer.ejs") %>
